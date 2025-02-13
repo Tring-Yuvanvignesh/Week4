@@ -7,7 +7,9 @@ import "./Read.css";
 const ReadComponent = ({ onRefresh }) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModel, setShowDeleteModel] = useState(false);
   const [index, setIndex] = useState(null);
+  const [deleteIndex, setDeleteIndex] = useState(null);
 
   return (
     <div className="read-container">
@@ -27,7 +29,11 @@ const ReadComponent = ({ onRefresh }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, i) => (
+          { data.length === 0 ? (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>No data</td>
+              </tr>
+            ) : data.map((item, i) => (
             <tr key={i}>
               <td>{item.name}</td>
               <td>{item.Designition}</td>
@@ -47,8 +53,8 @@ const ReadComponent = ({ onRefresh }) => {
                 <button 
                   className="delete-button" 
                   onClick={() => { 
-                    deleteData(i); 
-                    onRefresh(); 
+                    setDeleteIndex(i)
+                    setShowDeleteModel(true);
                   }}
                 >
                   Delete
@@ -81,6 +87,21 @@ const ReadComponent = ({ onRefresh }) => {
           </div>
         </div>
       )}
+
+      {showDeleteModel && (
+        <div className="modalStyle">
+          <div className="modalContentStyle">
+              <button onClick={ () => {
+                deleteData(deleteIndex)
+                setShowDeleteModel(false)
+              }}>Confirm</button>
+              <button onClick={()=>{
+                setShowDeleteModel(false)
+              }}>Cancel</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
