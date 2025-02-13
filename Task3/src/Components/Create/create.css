@@ -1,0 +1,28 @@
+Form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.Form-data{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Form-data > label{
+    width: 6.5rem;
+    text-align: start;
+}
+
+input, .submit {
+    height: 2rem;
+    width: 100%;
+}

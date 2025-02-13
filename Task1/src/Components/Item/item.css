@@ -1,0 +1,98 @@
+.container{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+*{
+    background: #292929;
+}
+
+h2 {
+    gap: 10px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;   
+    background: #EBA832;
+    text-align: center;
+}
+
+.container > div > input{
+    width: 466;
+    height: 54;
+    gap: 10px;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    border-width: 1px;    
+    height: 2rem;
+    width: 10rem;
+    margin-bottom: 2rem;
+    border: 1px solid #FFFFFF33;
+    color: white;
+}
+
+.addButton {
+    background: #EBA832;
+    border: none;
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.removeButton:hover {
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    background-color:#f0f0f0;
+}
+
+.addButton:hover {
+    cursor: pointer;
+    background: white;
+    background: #d4942c;
+}
+
+.submitContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.submit {
+    height: 3.5rem;
+    width: 6rem;
+    cursor: pointer;
+    background: #FFFFFF1A;
+    color: white;
+
+}
+
+.submit:hover {
+    background: #d4942c;
+    transition: background 0.3s ease-in-out;
+}
+
+.removeButton{
+    background: white;
+    border: none;
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-bottom: 2rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}   
+
+
+.displayData {
+    color: white;
+}
