@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addData } from "../../Data/data";
+import { addData, data } from "../../Data/data";
 import './create.css'
 
 const CreateComponent = ({ onRefresh }) => {
@@ -19,6 +19,7 @@ const CreateComponent = ({ onRefresh }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addData(formData);
+    // localStorage.setItem("appData", JSON.stringify(data));
     setFormData({ name: "", Age: "", skills: "", Designition: "", Address: "" });
     onRefresh();
   };

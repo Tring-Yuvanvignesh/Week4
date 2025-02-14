@@ -90,14 +90,18 @@ const ReadComponent = ({ onRefresh }) => {
 
       {showDeleteModel && (
         <div className="modalStyle">
-          <div className="modalContentStyle">
-              <button onClick={ () => {
-                deleteData(deleteIndex)
-                setShowDeleteModel(false)
-              }}>Confirm</button>
-              <button onClick={()=>{
-                setShowDeleteModel(false)
-              }}>Cancel</button>
+          <div className="modalContentStyle deleteModal">
+              <h1>Are you sure</h1>
+              <div className="buttonContainer">
+                  <button onClick={ () => {
+                    deleteData(deleteIndex);
+                    // localStorage.setItem("appData", JSON.stringify(data));
+                    setShowDeleteModel(false);
+                  }}>Confirm</button>
+                  <button onClick={()=>{
+                    setShowDeleteModel(false);
+                  }}>Cancel</button>
+              </div>
           </div>
         </div>
       )}
