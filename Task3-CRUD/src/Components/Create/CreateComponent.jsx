@@ -18,11 +18,24 @@ const CreateComponent = ({ onRefresh }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validCheck()) return;
     addData(formData);
     // localStorage.setItem("appData", JSON.stringify(data));
     setFormData({ name: "", Age: "", skills: "", Designition: "", Address: "" });
     onRefresh();
   };
+  
+
+  const validCheck = () => {
+    return Object.entries(formData).every(([key, value]) => {
+      if (!value.trim()) {
+        alert(`${key} is required`);
+        return false;
+      }
+      return true;
+    });
+  };
+  
 
   return (
     <div>

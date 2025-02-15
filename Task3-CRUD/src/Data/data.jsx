@@ -15,7 +15,7 @@ const saveData = () => {
   
   export const addData = (newEntry) => {
     data.push(newEntry);
-    saveData();
+    localStorage.setItem("appData", JSON.stringify(data));
   };
   
   export const updateData = (index, updatedEntry) => {

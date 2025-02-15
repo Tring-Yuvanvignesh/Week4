@@ -21,12 +21,30 @@ const Card = () => {
 
     fetchData();
   }, []);
+ 
+  function Ascending() {
+    const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+    setData(sortedData)
+    console.log(sortedData)
+  }
+
+  function Desending() {
+    const sortedData = data.sort((b, a) => a.name.localeCompare(b.name))
+    setData(sortedData)
+    console.log(sortedData)
+  }
 
   // console.log(data)
   
 
   return (
-    <div className="card-container">
+    <>
+    <div>
+      {/* <button onClick={Ascending}>Ascending </button>
+      <button onClick={Desending}>Descending </button> */}
+    </div>
+
+      <div className="card-container">
       {data.map((curr) => (
         <div className="card">
           <img className='mobile' src={mobile} alt="" />
@@ -44,6 +62,8 @@ const Card = () => {
         </div>
       ))}
     </div>
+    </>
+
   );
 };
 
