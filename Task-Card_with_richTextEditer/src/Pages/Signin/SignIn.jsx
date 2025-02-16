@@ -86,7 +86,6 @@ const SignIn = () => {
 
     return (
         <div className="signin-wrapper">
-            <div className="overlay"></div>
 
             <div className="content-wrapper">
                 <div className="left-section">

@@ -26,11 +26,14 @@ const PersonaDetails = () => {
             image: sampleImage,
             lastUpdated: "",
         }
-    );
+    )
+
+    const [showImageModal, setImageModal] = useState(null)
+    const [modalImage, setModalImage] = useState(personaData.image)
 
     const handleChange = (e) => {
         setPersonaData({ ...personaData, [e.target.name]: e.target.value })
-    };
+    }
 
     const handleUpdate = () => {
         const updatedPersona = {
@@ -42,10 +45,26 @@ const PersonaDetails = () => {
         alert("Persona updated successfully!")
         navigate("/landingPage")
     };
- 
+
     const handleDelete = () => {
         dispatch(deletePersonaForCurrentUser(personaData.id))
         navigate("/landingPage")
+    }
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert("File size should be less than 5MB!")
+                return;
+            }
+            setModalImage(URL.createObjectURL(file))
+        }
+    }
+ 
+    const ImageSubmit = () => {
+        setPersonaData({...personaData, image: modalImage})
     }
 
     return (
@@ -53,8 +72,8 @@ const PersonaDetails = () => {
             <div className="persona-banner" style={{ backgroundImage: `url(${personaData.image})` }}>
                 <div className="overlay">
                     <div className="persona-header">
-                        <div>
-                            <label className="persona-name-label">Persona Name*</label>
+                        <div className="persona_title">
+                            <label className="persona-name-label">Persona Name <label style={{ color: "red" }}>*</label></label>
                             <input
                                 type="text"
                                 name="title"
@@ -62,10 +81,46 @@ const PersonaDetails = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <button className="edit-image-btn">✏️ Edit Image</button>
+                        <label className="edit-image-btn">
+                            {/* <button onClick={() => setImageModal(true)} />✏️ Edit Image<button /> */}
+                            <button onClick={() => setImageModal(true)}></button>✏️ Edit Image
+                        </label>
                     </div>
                 </div>
             </div>
+            {showImageModal && (
+                <div className="modal-overlay">
+                    <div className="modal-container">
+                        <div className="modal-header">
+                            <h4>Update Image</h4>
+                            <button onClick={() => {setImageModal(false); setModalImage(personaData.image)}} className="close-button">✖</button>
+                        </div>
+
+                        <div className="image-preview-container">
+                            <div className="image-wrapper">
+                                {personaData.image ? (
+                                    <img src={modalImage} alt="Preview" className="preview-image" />
+                                ) : (
+                                    <span className="no-image-text">No Image Selected</span>
+                                )}
+                                <label className="change-image-btn">
+                                    <input type="file" className="hidden-file-input" onChange={handleImageChange} accept="image/*" />
+                                    Change Image
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="modal-actions">
+                            <div></div>
+                            <div>
+                                <button onClick={() => {setImageModal(false); setModalImage(personaData.image)}} className="cancel-button">CANCEL</button>
+                                <button className="save-button" onClick={() => { ImageSubmit(); setImageModal(false); }}>SAVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
             <div className="persona-content">
                 <div className="persona-grid">

@@ -7,10 +7,10 @@ import './landingPage.css'
 const LandingPage = () => {
 
   return (
-    <>
+    <div className='Landing'>
       <Landingnav />
       <PersonaGrid />
-    </>
+    </div>
   )
 }
 
