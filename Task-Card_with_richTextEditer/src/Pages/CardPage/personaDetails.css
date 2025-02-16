@@ -1,0 +1,107 @@
+.persona-details {
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.persona-banner {
+    position: relative;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: white;
+}
+
+.persona-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.persona-name-label {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.persona-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.edit-image-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.persona-content {
+    padding: 20px;
+}
+
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.persona-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.persona-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.persona-field input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.persona-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.delete-btn {
+    color: red;
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.close-btn,
+.update-btn {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn {
+    background: #ddd;
+}
+
+.update-btn {
+    background: #007bff;
+    color: white;
+}
