@@ -1,67 +1,66 @@
-// import React from "react";
-// import { useParams } from "react-router-dom";
-// import sampleImage from '../../Images/login_background.png'
-
-// const PersonaDetails = () => {
-//     const { id } = useParams();
-
-//     const personaData = [
-//     { id: 1, image: sampleImage, title: "Sample", lastUpdated: "4 mins ago" },
-//     { id: 2, image: sampleImage, title: "Sample2", lastUpdated: "3 mins ago" },
-//     { id: 3, image: sampleImage, title: "Sample3", lastUpdated: "2 mins ago" }
-//     ];
-
-//     const persona = personaData[id] || { title: "Unknown Persona", image: "", description: "No data found." };
-
-//     return (
-//         <div className="persona-details">
-//             <img src={persona.image} alt={persona.title} className="personaDetails-image" />
-//             <h1>{persona.title}</h1>
-//             <p>{persona.description}</p>
-//         </div>
-//     );
-// };
-
-// export default PersonaDetails;
-
-
-import React, { useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePersonaForCurrentUser, deletePersonaForCurrentUser } from "../../Slicer/authSlice";
 import "./personaDetails.css";
-import sampleImage from '../../Images/login_background.png'
+import sampleImage from '../../Images/login_background.png';
 
 const PersonaDetails = () => {
     const { id } = useParams();
-    const personaDa = [
-    { id: 1, image: sampleImage, title: "Sample", lastUpdated: "4 mins ago" },
-    { id: 2, image: sampleImage, title: "Sample2", lastUpdated: "3 mins ago" },
-    { id: 3, image: sampleImage, title: "Sample3", lastUpdated: "2 mins ago" }
-    ];
-    const persona = personaDa[id] || { title: "Unknown Persona", image: "", description: "No data found." };
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.auth.currentUser);
 
-    const [personaData, setPersonaData] = useState({
-        name: persona.title,
-        quote: "",
-        description: "",
-        motivations: "",
-        painPoints: "",
-        jobsNeeds: "",
-        activities: "",
-    });
+    const existingPersona = currentUser.personas.find(p => p.id === parseInt(id));
+
+    const [personaData, setPersonaData] = useState(
+        existingPersona || {
+            id: parseInt(id),
+            title: "",
+            quote: "",
+            description: "",
+            motivations: "",
+            painPoints: "",
+            jobsNeeds: "",
+            activities: "",
+            image: sampleImage,
+            lastUpdated: "",
+        }
+    );
 
     const handleChange = (e) => {
-        setPersonaData({ ...personaData, [e.target.name]: e.target.value });
+        setPersonaData({ ...personaData, [e.target.name]: e.target.value })
     };
+
+    const handleUpdate = () => {
+        const updatedPersona = {
+            ...personaData,
+            lastUpdated: new Date().toLocaleString(),
+        }
+
+        dispatch(updatePersonaForCurrentUser(updatedPersona))
+        alert("Persona updated successfully!")
+        navigate("/landingPage")
+    };
+ 
+    const handleDelete = () => {
+        dispatch(deletePersonaForCurrentUser(personaData.id))
+        navigate("/landingPage")
+    }
 
     return (
         <div className="persona-details">
-            {/* Background Image Section */}
-            <div className="persona-banner" style={{ backgroundImage: `url(${persona.image})` }}>
+            <div className="persona-banner" style={{ backgroundImage: `url(${personaData.image})` }}>
                 <div className="overlay">
                     <div className="persona-header">
                         <div>
                             <label className="persona-name-label">Persona Name*</label>
-                            <h1 className="persona-name">{personaData.name}</h1>
+                            <input
+                                type="text"
+                                name="title"
+                                value={personaData.title}
+                                onChange={handleChange}
+                            />
                         </div>
                         <button className="edit-image-btn">✏️ Edit Image</button>
                     </div>
@@ -95,7 +94,7 @@ const PersonaDetails = () => {
                         <input
                             type="text"
                             name="motivations"
-                            placeholder="What drives and incentives the persona?"
+                            placeholder="What drives the persona?"
                             value={personaData.motivations}
                             onChange={handleChange}
                         />
@@ -103,12 +102,11 @@ const PersonaDetails = () => {
                 </div>
             </div>
 
-            {/* Buttons Section */}
             <div className="persona-footer">
-                <button className="delete-btn">DELETE</button>
+                <button className="delete-btn" onClick={handleDelete}>DELETE</button>
                 <div>
-                    <button className="close-btn">CLOSE</button>
-                    <button className="update-btn">UPDATE PERSONA</button>
+                    <Link to={'/landingPage'}><button className="close-btn">CLOSE</button></Link>
+                    <button className="update-btn" onClick={handleUpdate}>UPDATE PERSONA</button>
                 </div>
             </div>
         </div>
