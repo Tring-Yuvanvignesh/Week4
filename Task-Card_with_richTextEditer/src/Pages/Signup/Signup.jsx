@@ -65,7 +65,7 @@ const SignUp = () => {
 
     const handleChange = (e) => {
         setUserDetails({ ...userDetails, [e.target.name]: e.target.value })
-    };
+    }
 
     const validate = (e) => {
         const password = e.target.value
@@ -87,19 +87,19 @@ const SignUp = () => {
         const emailExists = users.some(user => user.email === email);
 
         if (!validator.isEmail(email)) {
-            setEmailError("Enter a valid Email!");
-            setUserDetails({ ...userDetails, email: "" });
+            setEmailError("Enter a valid Email!")
+            setUserDetails({ ...userDetails, email: "" })
             return;
         }
     
         if (emailExists) {
-            setEmailError("Email is already in use!");
-            setUserDetails({ ...userDetails, email: "" });
+            setEmailError("Email is already in use!")
+            setUserDetails({ ...userDetails, email: "" })
             return;
         }
     
         setEmailError(null);
-        setUserDetails({ ...userDetails, email });
+        setUserDetails({ ...userDetails, email })
     }
 
     const validateName = (e) => {
@@ -107,12 +107,12 @@ const SignUp = () => {
 
         if(currName.trim() === ""){
             setNameError("Please enter a valid name.")
-            setUserDetails({ ...userDetails, name: "" });
+            setUserDetails({ ...userDetails, name: "" })
             return
         }
         else{
             setNameError(null)
-            setUserDetails({ ...userDetails, name: currName });
+            setUserDetails({ ...userDetails, name: currName })
         }
     }
 
@@ -123,7 +123,7 @@ const SignUp = () => {
             return
         }
 
-        dispatch(registerUser(userDetails));
+        dispatch(registerUser(userDetails))
         navigate("/signIn")
     }
 

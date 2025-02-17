@@ -71,16 +71,16 @@ const SignIn = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const userExists = users.find(
             (user) => user.email === credentials.email && user.password === credentials.password
-        );
+        )
 
         if (userExists) {
-            dispatch(loginUser(credentials));
-            navigate("/landingPage");
+            dispatch(loginUser(credentials))
+            navigate("/landingPage")
         } else {
-            alert("Invalid email or password");
+            alert("Invalid email or password")
         }
     };
 

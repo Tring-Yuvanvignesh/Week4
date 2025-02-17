@@ -12,13 +12,13 @@
     width: 100%;
 }
 
-.persona_title{
+.persona_title {
     display: flex;
     flex-direction: column;
     gap: 2px;
 }
 
-.persona_title input{
+.persona_title input {
     background: transparent;
     color: white;
     border-radius: 5px;
@@ -30,7 +30,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-    border-bottom: 0.1px  black;
+    border-bottom: 0.1px black;
     display: flex;
     align-items: flex-end;
     padding: 20px;
@@ -86,7 +86,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-top: 1px solid #ddd;
+    margin-top: 0.7rem;
 }
 
 .delete-btn {
@@ -145,9 +145,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modalContentStyle {
+}
+
+.modalContentStyle {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -155,13 +155,13 @@
     position: relative;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-  }
+}
 
-  .modalImageStyle {
+.modalImageStyle {
     width: 22rem;
-  }
+}
 
-  .closeButtonStyle {
+.closeButtonStyle {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -171,14 +171,15 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .closeButtonStyle:hover {
+}
+
+.closeButtonStyle:hover {
     background: #c0392b;
-  }
+}
 
 .modal-overlay {
     position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
@@ -290,5 +291,3 @@
 .save-button:hover {
     background: #10355c;
 }
-
-  

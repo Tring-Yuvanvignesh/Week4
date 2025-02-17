@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePersonaForCurrentUser, deletePersonaForCurrentUser } from "../../Slicer/authSlice";
 import "./personaDetails.css";
 import sampleImage from '../../Images/login_background.png';
+import  Quill  from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const PersonaDetails = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const currentUser = useSelector((state) => state.auth.currentUser);
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const currentUser = useSelector((state) => state.auth.currentUser)
 
-    const existingPersona = currentUser.personas.find(p => p.id === parseInt(id));
+    const existingPersona = currentUser.personas.find(p => p.id === parseInt(id))
 
     const [personaData, setPersonaData] = useState(
         existingPersona || {
@@ -33,6 +35,18 @@ const PersonaDetails = () => {
 
     const handleChange = (e) => {
         setPersonaData({ ...personaData, [e.target.name]: e.target.value })
+    }
+
+    const handlepain = (value) => {
+        setPersonaData({ ...personaData, painPoints: value })
+    }
+
+    const handleJobs = (value) => {
+        setPersonaData({ ...personaData, jobsNeeds: value })
+    }
+
+    const handleActivities = (value) => {
+        setPersonaData({ ...personaData, activities: value })
     }
 
     const handleUpdate = () => {
@@ -62,9 +76,9 @@ const PersonaDetails = () => {
             setModalImage(URL.createObjectURL(file))
         }
     }
- 
+
     const ImageSubmit = () => {
-        setPersonaData({...personaData, image: modalImage})
+        setPersonaData({ ...personaData, image: modalImage })
     }
 
     return (
@@ -93,7 +107,7 @@ const PersonaDetails = () => {
                     <div className="modal-container">
                         <div className="modal-header">
                             <h4>Update Image</h4>
-                            <button onClick={() => {setImageModal(false); setModalImage(personaData.image)}} className="close-button">✖</button>
+                            <button onClick={() => { setImageModal(false); setModalImage(personaData.image) }} className="close-button">✖</button>
                         </div>
 
                         <div className="image-preview-container">
@@ -113,7 +127,7 @@ const PersonaDetails = () => {
                         <div className="modal-actions">
                             <div></div>
                             <div>
-                                <button onClick={() => {setImageModal(false); setModalImage(personaData.image)}} className="cancel-button">CANCEL</button>
+                                <button onClick={() => { setImageModal(false); setModalImage(personaData.image) }} className="cancel-button">CANCEL</button>
                                 <button className="save-button" onClick={() => { ImageSubmit(); setImageModal(false); }}>SAVE</button>
                             </div>
                         </div>
@@ -152,6 +166,36 @@ const PersonaDetails = () => {
                             placeholder="What drives the persona?"
                             value={personaData.motivations}
                             onChange={handleChange}
+                        />
+                    </div>
+                    <div className="persona-field">
+                    <label>Pain Points</label>
+                        <Quill
+                            theme="snow"
+                            style={{ height: "85px" }} 
+                            onChange={handlepain}
+                            value={personaData.painPoints} 
+                            name="painPoints"
+                        />
+                    </div>
+                    <div className="persona-field">
+                    <label>Jobs / Needs</label>
+                        <Quill
+                            theme="snow"
+                            style={{ height: "85px" }}
+                            onChange={handleJobs}
+                            name="jobsNeeds"
+                            value={personaData.jobsNeeds} 
+                        />
+                    </div>
+                    <div className="persona-field">
+                    <label>Activities</label>
+                        <Quill
+                            theme="snow"
+                            style={{ height: "85px" }}
+                            onChange={handleActivities} 
+                            name="activities"
+                            value={personaData.activities} 
                         />
                     </div>
                 </div>
