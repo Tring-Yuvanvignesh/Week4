@@ -149,7 +149,7 @@ const PersonaCard = ({ id, image, title, lastUpdated }) => {
         <div className="persona-card" onClick={() => navigate(`/persona/${id}`)}>
             <img src={image} alt={title} className="persona-image" />
             <h3 className="persona-title">{title || "Untitled Persona"}</h3>
-            <p className="persona-timestamp">Last updated: {lastUpdated || "Never"}</p>
+            {/* <p className="persona-timestamp">Last updated: {lastUpdated || "Never"}</p> */}
         </div>
     );
 };
@@ -166,13 +166,9 @@ const AddPersonaCard = ({ onClick }) => {
 const PersonaGrid = () => {
     const navigate = useNavigate();
     const currentUser = useSelector((state) => state.auth.currentUser);
-    const personas = currentUser?.personas || [];
+    const personas = currentUser.personas || [];
 
     const handleAddPersona = () => {
-        if (!currentUser) {
-            alert("Please log in to create a persona.");
-            return;
-        }
 
         const newId = personas.length > 0 ? personas[personas.length - 1].id + 1 : 1;
 

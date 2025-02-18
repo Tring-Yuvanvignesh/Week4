@@ -63,20 +63,26 @@ const authSlice = createSlice({
     },
     reducers: {
         registerUser: (state, action) => {
+
+            // using users state, users local
+
             const users = getUsersFromLocalStorage()
-            users.push({ ...action.payload, personas: [] })
-            localStorage.setItem("users", JSON.stringify(users))
+            users.push({ ...action.payload, personas: [] }) // update users state
+            localStorage.setItem("users", JSON.stringify(users)) // update users local
             state.users = users
         },
 
         loginUser: (state, action) => {
+
+            // using currUser state, users local
+
             const { email, password } = action.payload
             const users = getUsersFromLocalStorage()
             const user = users.find(user => user.email === email && user.password === password)
             
             if (user) {
-                state.currentUser = user;
-                localStorage.setItem("currentUser", JSON.stringify(user))
+                state.currentUser = user; // update currUser state
+                localStorage.setItem("currentUser", JSON.stringify(user)) // update currUser local
             } else {
                 alert("Invalid email or password")
             }
@@ -88,49 +94,57 @@ const authSlice = createSlice({
         },
         
         updatePersonaForCurrentUser: (state, action) => {
-            if (state.currentUser) {
+
+                // using currUser state, currUser local, update users state, user local 
+
                 const updatedPersona = action.payload
 
                 if (!state.currentUser.personas) {
                     state.currentUser.personas = []
                 }
 
-                const index = state.currentUser.personas.findIndex(p => p.id === updatedPersona.id);
+                const index = state.currentUser.personas.findIndex(p => p.id === updatedPersona.id); // Get particular persona / -1
 
-                if (index !== -1) {
+                // update currUser state
+                if (index !== -1) { 
                     state.currentUser.personas[index] = updatedPersona
-                } else {
-                    const newId = state.currentUser.personas.length > 0
-                        ? state.currentUser.personas[state.currentUser.personas.length - 1].id + 1
-                        : 1
-
-                    state.currentUser.personas.push({ ...updatedPersona, id: newId })
+                } else { 
+                    state.currentUser.personas.push({ ...updatedPersona }) 
                 }
 
+                // update in currUser local
                 localStorage.setItem("currentUser", JSON.stringify(state.currentUser))
 
+                // update users state
                 const users = getUsersFromLocalStorage()
-                const updatedUsers = users.map(user =>
-                    user.email === state.currentUser.email
+                const updatedUsers = users.map(user => 
+                    user.email === state.currentUser.email // get the correct user
                         ? { ...user, personas: state.currentUser.personas }
                         : user
                 )
 
+                // update users local
                 localStorage.setItem("users", JSON.stringify(updatedUsers))
                 state.users = updatedUsers
-            }
         },
         deletePersonaForCurrentUser: (state, action) => {
+
+            // using currUser state, users state, currUser local, users local
+
+
             const Pid = action.payload
             const updatedData = state.currentUser.personas.filter( p => p.id !== Pid)
 
+            // update curruser state
             state.currentUser.personas = updatedData
 
+            // update currUser local
             localStorage.setItem("currentUser", JSON.stringify({
                 ...state.currentUser,
                 personas: updatedData
             }))
 
+            // update users state
             const users = getUsersFromLocalStorage()
             const updatedUsers = users.map(user =>
                 user.email === state.currentUser.email
@@ -138,6 +152,7 @@ const authSlice = createSlice({
                     : user
             )
 
+            // update users local
             localStorage.setItem("users", JSON.stringify(updatedUsers))
             state.users = updatedUsers
         }

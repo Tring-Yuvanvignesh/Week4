@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePersonaForCurrentUser, deletePersonaForCurrentUser } from "../../Slicer/authSlice";
-import "./personaDetails.css";
-import sampleImage from '../../Images/login_background.png';
+import "./personaDetails.css"
+import sampleImage from '../../Images/login_background.png'
 import  Quill  from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css"
 
 const PersonaDetails = () => {
     const { id } = useParams()
@@ -30,7 +30,7 @@ const PersonaDetails = () => {
         }
     )
 
-    const [showImageModal, setImageModal] = useState(null)
+    const [showImageModal, setImageModal] = useState(false)
     const [modalImage, setModalImage] = useState(personaData.image)
 
     const handleChange = (e) => {
@@ -52,7 +52,7 @@ const PersonaDetails = () => {
     const handleUpdate = () => {
         const updatedPersona = {
             ...personaData,
-            lastUpdated: new Date().toLocaleString(),
+            // lastUpdated: new Date().toLocaleString(),
         }
 
         dispatch(updatePersonaForCurrentUser(updatedPersona))
@@ -70,11 +70,20 @@ const PersonaDetails = () => {
 
         if (file) {
             if (file.size > 5 * 1024 * 1024) {
-                alert("File size should be less than 5MB!")
+                alert("File size should be less than 5MB")
                 return;
             }
             setModalImage(URL.createObjectURL(file))
-        }
+            // const reader = new FileReader()
+            // reader.readAsDataURL(file)
+            // reader.onload = function() {
+            //     setModalImage(reader.result)
+            // }
+            // reader.onerror = function() {
+            //     setImageModal(false)
+            // }
+            // reader.readAsDataURL(file); 
+         }
     }
 
     const ImageSubmit = () => {
