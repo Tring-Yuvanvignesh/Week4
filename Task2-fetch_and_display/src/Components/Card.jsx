@@ -36,32 +36,31 @@ const Card = () => {
 
   // console.log(data)
   
-
   return (
     <>
-    <div>
-      {/* <button onClick={Ascending}>Ascending </button>
+      <div>
+        {/* <button onClick={Ascending}>Ascending </button>
       <button onClick={Desending}>Descending </button> */}
-    </div>
+      </div>
 
       <div className="card-container">
-      {data.map((curr) => (
-        <div className="card">
-          <img className='mobile' src={mobile} alt="" />
-          <h2>{curr.name}</h2>
-          { curr.data ? (
-            <ul>
-              {Object.entries(curr.data).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {value}
-                </li>
-              ))}
-            </ul>
-          ) : <p>No details</p>
-          }
-        </div>
-      ))}
-    </div>
+        {data.map((curr) => (
+          <div className="card">
+            <img className='mobile' src={mobile} alt="" />
+            <h2>{curr.name}</h2>
+            {curr.data ? (
+              <ul>
+                {Object.entries(curr.data).map(([key, value]) => (
+                  <li key={key}>
+                    <strong>{key}:</strong> {value}
+                  </li>
+                ))}
+              </ul>
+            ) : <p>No details</p>
+            }
+          </div>
+        ))}
+      </div>
     </>
 
   );
