@@ -3,19 +3,19 @@
 
 
 const loadData = () => {
-  const storedData = localStorage.getItem("appData");
-  return storedData ? JSON.parse(storedData) : [];
+  const storedData = localStorage.getItem("appData")
+  return storedData ? JSON.parse(storedData) : []
 };
 
-export let data = loadData();
+export let data = loadData()
 
 const saveData = () => {
-  localStorage.setItem("appData", JSON.stringify(data));
+  localStorage.setItem("appData", JSON.stringify(data))
 };
   
   export const addData = (newEntry) => {
     data.push(newEntry);
-    localStorage.setItem("appData", JSON.stringify(data));
+    localStorage.setItem("appData", JSON.stringify(data))
   };
   
   export const updateData = (index, updatedEntry) => {
