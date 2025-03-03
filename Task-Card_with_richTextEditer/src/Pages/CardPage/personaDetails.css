@@ -291,3 +291,51 @@
 .save-button:hover {
     background: #10355c;
 }
+
+.delete-modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.delete-modal{
+    background-color: white;
+    position: absolute;
+    top: 50;
+    left: 50;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.delete-content {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-actions {
+    display: flex;
+    justify-content: flex-end;
+} 
+
+.delete-img {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.delete-img img {
+    height: 210px;
+    display: block;
+}
+
+.delete-headder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+}

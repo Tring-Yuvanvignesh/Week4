@@ -148,7 +148,7 @@ const SignUp = () => {
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" placeholder="Create a password" onChange={validate} />
                     {errorMessage && (
-                        <span style={{ color: 'red' }}>{errorMessage}</span>
+                        <span style={{ color: 'red', marginBottom: '4px' }}>{errorMessage}</span>
                     )}
 
                     <button className="register-btn" onClick={handleSubmit} disabled={!!(errorMessage || emailError || nameError)}>
@@ -169,8 +169,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="signUp-right-section">
-                    <h2>Join Us!</h2>
-                    <p>Sign up to explore more.</p>
+                    <h1>Welcome</h1>
                 </div>
             </div>
         </div>

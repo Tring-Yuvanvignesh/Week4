@@ -59,7 +59,7 @@ const authSlice = createSlice({
     initialState: {
         users: getUsersFromLocalStorage(),
         // currentUserData: getCurrentUserFromLocalStorage(),
-        currentUser: getCurrentUserFromLocalStorage()
+        currentUser: null
     },
     reducers: {
         registerUser: (state, action) => {

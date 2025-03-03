@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePersonaForCurrentUser, deletePersonaForCurrentUser } from "../../Slicer/authSlice";
 import "./personaDetails.css"
 import sampleImage from '../../Images/login_background.png'
-import  Quill  from "react-quill";
+import Quill from "react-quill";
 import "react-quill/dist/quill.snow.css"
+import exclamation from './../../Images/Delete_Persona.png';
 
 const PersonaDetails = () => {
     const { id } = useParams()
@@ -32,6 +33,7 @@ const PersonaDetails = () => {
 
     const [showImageModal, setImageModal] = useState(false)
     const [modalImage, setModalImage] = useState(personaData.image)
+    const [showDeleteModal, setDeleteModal] = useState(false)
 
     const handleChange = (e) => {
         setPersonaData({ ...personaData, [e.target.name]: e.target.value })
@@ -83,7 +85,7 @@ const PersonaDetails = () => {
             //     setImageModal(false)
             // }
             // reader.readAsDataURL(file); 
-         }
+        }
     }
 
     const ImageSubmit = () => {
@@ -178,40 +180,59 @@ const PersonaDetails = () => {
                         />
                     </div>
                     <div className="persona-field">
-                    <label>Pain Points</label>
+                        <label>Pain Points</label>
                         <Quill
                             theme="snow"
-                            style={{ height: "85px" }} 
+                            style={{ height: "85px" }}
                             onChange={handlepain}
-                            value={personaData.painPoints} 
+                            value={personaData.painPoints}
                             name="painPoints"
                         />
                     </div>
                     <div className="persona-field">
-                    <label>Jobs / Needs</label>
+                        <label>Jobs / Needs</label>
                         <Quill
                             theme="snow"
                             style={{ height: "85px" }}
                             onChange={handleJobs}
                             name="jobsNeeds"
-                            value={personaData.jobsNeeds} 
+                            value={personaData.jobsNeeds}
                         />
                     </div>
                     <div className="persona-field">
-                    <label>Activities</label>
+                        <label>Activities</label>
                         <Quill
                             theme="snow"
                             style={{ height: "85px" }}
-                            onChange={handleActivities} 
+                            onChange={handleActivities}
                             name="activities"
-                            value={personaData.activities} 
+                            value={personaData.activities}
                         />
                     </div>
                 </div>
             </div>
 
             <div className="persona-footer">
-                <button className="delete-btn" onClick={handleDelete}>DELETE</button>
+                <button className="delete-btn" onClick={() => setDeleteModal(true)}>DELETE</button>
+                {showDeleteModal &&
+                    <div className="modal-overlay">
+                        <div className="delete-modal-container">
+                            <div className="delete-modal">
+                                <div className="delete-headder">
+                                    <h4>Delete Persona</h4>
+                                    <button onClick={() => { setDeleteModal(false); setModalImage(personaData.image) }} className="close-button">✖</button>
+                                </div>
+                                <div className="delete-hr"><hr /></div>
+                                <div className="delete-img"><img src={exclamation} alt="exclamation" /></div>
+                                <div className="delete-content"><h3>Are You Sure</h3></div>
+                                <div className="delete-actions">
+                                    <button className="close-btn" onClick={() => setDeleteModal(false)}>CLOSE</button>
+                                    <button className="delete-btn" onClick={handleDelete}>DELETE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div>
                     <Link to={'/landingPage'}><button className="close-btn">CLOSE</button></Link>
                     <button className="update-btn" onClick={handleUpdate}>UPDATE PERSONA</button>

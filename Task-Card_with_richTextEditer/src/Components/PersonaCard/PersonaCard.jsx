@@ -139,7 +139,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./personaCard.css";
 import sampleImage from "../../Images/login_background.png";
 
@@ -163,10 +163,12 @@ const AddPersonaCard = ({ onClick }) => {
     );
 };
 
+
+
 const PersonaGrid = () => {
     const navigate = useNavigate();
     const currentUser = useSelector((state) => state.auth.currentUser);
-    const personas = currentUser.personas || [];
+    const personas = currentUser.personas;
 
     const handleAddPersona = () => {
 

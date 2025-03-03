@@ -53,7 +53,7 @@
 // export default SignIn;
 
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Slicer/authSlice";
 import { Link, useNavigate } from "react-router-dom";
@@ -75,6 +75,7 @@ const SignIn = () => {
         const userExists = users.find(
             (user) => user.email === credentials.email && user.password === credentials.password
         )
+        
 
         if (userExists) {
             dispatch(loginUser(credentials))
@@ -90,7 +91,6 @@ const SignIn = () => {
             <div className="content-wrapper">
                 <div className="left-section">
                     <h2>Welcome Back!</h2>
-                    <p>Sign in to continue your journey.</p>
                 </div>
 
                 <div className="signin-container">
